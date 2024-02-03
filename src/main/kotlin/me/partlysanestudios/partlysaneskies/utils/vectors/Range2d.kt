@@ -34,6 +34,14 @@ class Range2d(x1: Double, y1: Double, x2: Double, y2: Double) {
         return false
     }
 
+    val xDistance: Double get() {
+        return smallCoordinate[0] - largeCoordinate[0]
+    }
+
+    val yDistance: Double get() {
+        return smallCoordinate[1] - largeCoordinate[1]
+    }
+
     val points: Array<Point2d>
         get() = arrayOf(
             Point2d(

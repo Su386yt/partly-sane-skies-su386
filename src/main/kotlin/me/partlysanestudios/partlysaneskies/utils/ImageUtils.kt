@@ -8,6 +8,7 @@ package me.partlysanestudios.partlysaneskies.utils
 
 import cc.polyfrost.oneconfig.config.core.OneColor
 import me.partlysanestudios.partlysaneskies.utils.vectors.Axis
+import me.partlysanestudios.partlysaneskies.utils.vectors.Range2d
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
@@ -18,6 +19,11 @@ import javax.imageio.ImageIO
 object ImageUtils {
     //    Save all images in ./config/partly-sane-skies/image_variants/{name of base image}/{name of coloured image}
     private const val IMAGE_SAVE_PATH = "./config/partly-sane-skies/image_variants/"
+
+    val BufferedImage.dimensions: Range2d get() {
+        return Range2d(0.0, this.width.toDouble(), 0.0, this.height.toDouble())
+    }
+
     @Throws(IOException::class)
     fun saveImage(image: BufferedImage, path: Path) {
         val output = path.toFile()

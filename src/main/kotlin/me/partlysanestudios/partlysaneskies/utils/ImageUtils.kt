@@ -7,6 +7,7 @@
 package me.partlysanestudios.partlysaneskies.utils
 
 import cc.polyfrost.oneconfig.config.core.OneColor
+import me.partlysanestudios.partlysaneskies.utils.vectors.Axis
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
@@ -26,6 +27,17 @@ object ImageUtils {
     @Throws(IOException::class)
     fun loadImage(path: String): BufferedImage {
         return ImageIO.read(File(path))
+    }
+
+    fun findSmallerSide(image: BufferedImage): Axis {
+        val width = image.width
+        val height = image.height
+
+        if(width > height) {
+            return Axis.X_AXIS
+        } else {
+        return Axis.Y_AXIS
+        }
     }
 
     fun replaceColor(image: BufferedImage, oldColor: Color, newColor: Color): BufferedImage {

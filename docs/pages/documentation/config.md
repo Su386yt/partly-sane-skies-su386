@@ -1,6 +1,6 @@
 # Config in Partly Sane Skies
 
-There are two main config types in Partly Sane Skies: OneConfig, Partly Sane Config (PSConfig/PSConf). Raw JSON files, can also be used, but should primarirly be used for storing data when OneConfig or PSConfig cannot be used.
+There are two main config types in Partly Sane Skies: OneConfig, Partly Sane Config (PSConfig/PSConf). Raw JSON files, can also be used, but should primarily be used for storing data when OneConfig or PSConfig cannot be used.
 
 ## OneConfig
 
@@ -8,7 +8,7 @@ OneConfig is current our most end-user friendly config library.
 
 The OneConfig class is located at ``me.partlysanestudios.partlysaneskies.config.OneConfigScreen`` and is written entirely in Kotlin.
 
-Within the class, we seperate each new category using:
+Within the class, we separate each new category using:
 
 ```kt
 
@@ -16,7 +16,7 @@ Within the class, we seperate each new category using:
 
 ```
 
-and we seperate each new subcategory using:
+and we separate each new subcategory using:
 
 ```kt
 
@@ -56,9 +56,11 @@ if (exampleVar.isEmpty()) {
 }
 ```
 
+*Find official [OneConfig documentation here](https://docs.polyfrost.org/oneconfig)*
+
 ## Partly Sane Config
 
-Partly Sane Config (PSConfig/PSConf) is a propriatary config library aimed at by dynamic, as opposed to using variable annotations (like OneConfig). It is also designed to be highly modular. 
+Partly Sane Config (PSConfig/PSConf) is a proprietary config library aimed at by dynamic, as opposed to using variable annotations (like OneConfig). It is also designed to be highly modular. 
 
 ### Use Instructions
 
@@ -91,9 +93,9 @@ init {
 
 
 
-To retrive an option, you can use the ``find()`` method on the config object.
+To retrieve an option, you can use the ``find()`` method on the config object.
 
-Example retriving the ``Toggle`` option created in the previous example:
+Example retrieving the ``Toggle`` option created in the previous example:
 
 ```kt
 config.find("exampleConfigKey").asBoolean
@@ -115,4 +117,4 @@ The class must implement the ``saveToJson`` method, which must return a ``JsonEl
 
 The class must implement the ``loadFromJson`` method, which is passed a JsonElement (in the same format as the ``saveToJson`` method returns) and must load the previous save state.
 
-See ``Toggle`` class for example.
+See [``Toggle`` class](/src/main/kotlin/me/partlysanestudios/partlysaneskies/config/psconfig/Toggle.kt) for example.

@@ -1,6 +1,6 @@
 //
 // Written by DerGruenkohl
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 

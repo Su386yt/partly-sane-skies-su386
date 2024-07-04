@@ -1,6 +1,6 @@
 //
 // Written by J10a1n15, with a lot of help from Su386.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 package me.partlysanestudios.partlysaneskies.features.chat;

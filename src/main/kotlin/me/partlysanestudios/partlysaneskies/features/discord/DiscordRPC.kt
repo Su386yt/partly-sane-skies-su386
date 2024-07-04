@@ -1,6 +1,6 @@
 //
 // Written by Su386 and from https://github.com/JnCrMx/discord-game-sdk4j/blob/master/examples.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 

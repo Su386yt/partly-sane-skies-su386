@@ -1,6 +1,6 @@
 /*
  * Written by Su386.
- * See LICENSE for copyright and license notices.
+ * See COPYING for copyright and license notices.
  *
  *
  * Partly Sane Skies would not be possible with out the help of these projects:

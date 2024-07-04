@@ -1,6 +1,6 @@
 //
 // Written by Su386 with help from Hannibal002.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 

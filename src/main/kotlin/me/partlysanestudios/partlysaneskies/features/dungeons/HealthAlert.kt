@@ -1,6 +1,6 @@
 //
 // Written by FlagMaster and Su386.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 

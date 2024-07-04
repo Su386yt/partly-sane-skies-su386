@@ -1,6 +1,6 @@
 //
 // Written by Su386 (except where noted)
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 

@@ -1,6 +1,6 @@
 //
 // Written by J10a1n15.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 // Time spend afking in the mines: ~4h
 //

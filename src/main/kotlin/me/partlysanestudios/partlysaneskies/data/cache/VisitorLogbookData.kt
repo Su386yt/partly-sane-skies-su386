@@ -1,6 +1,6 @@
 //
 // Written by Su386 and Erymanthus[#5074] | (u/)RayDeeUx.
-// See LICENSE for copyright and license notices.
+// See COPYING for copyright and license notices.
 //
 
 package me.partlysanestudios.partlysaneskies.data.cache

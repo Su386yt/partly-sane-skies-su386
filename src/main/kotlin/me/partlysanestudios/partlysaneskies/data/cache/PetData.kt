@@ -35,7 +35,7 @@ object PetData {
 
     val jsonPath = Path("./config/partly-sane-skies/petData.json")
 
-    val petNameRegex = "§.\\[Lvl (\\d+)] (§.)(\\w+(\\s\\w+)*)(?: ✦)?".toRegex()
+    val petNameRegex = "§.\\[Lvl (\\d+)] (§.)(\\w+(?:\\s\\w+)*)(?: ✦)?".toRegex()
 
     var lastSaveTime = -1L
 

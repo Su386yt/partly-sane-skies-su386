@@ -30,6 +30,7 @@ import me.partlysanestudios.partlysaneskies.config.psconfig.Toggle.Companion.asT
 import me.partlysanestudios.partlysaneskies.data.cache.PetData
 import me.partlysanestudios.partlysaneskies.data.cache.StatsData
 import me.partlysanestudios.partlysaneskies.data.cache.VisitorLogbookData
+import me.partlysanestudios.partlysaneskies.data.hypixeldata.FriendsData
 import me.partlysanestudios.partlysaneskies.data.pssdata.PublicDataManager
 import me.partlysanestudios.partlysaneskies.data.skyblockdata.SkyblockDataManager
 import me.partlysanestudios.partlysaneskies.events.EventManager
@@ -57,7 +58,6 @@ import me.partlysanestudios.partlysaneskies.features.dungeons.RequiredSecretsFou
 import me.partlysanestudios.partlysaneskies.features.dungeons.TerminalWaypoints
 import me.partlysanestudios.partlysaneskies.features.dungeons.WatcherReady
 import me.partlysanestudios.partlysaneskies.features.dungeons.party.PartyFriendManager
-import me.partlysanestudios.partlysaneskies.features.dungeons.party.partymanager.PartyManager
 import me.partlysanestudios.partlysaneskies.features.dungeons.party.permpartyselector.PermPartyManager
 import me.partlysanestudios.partlysaneskies.features.economy.BitsShopValue
 import me.partlysanestudios.partlysaneskies.features.economy.CoinsToBoosterCookies
@@ -88,6 +88,7 @@ import me.partlysanestudios.partlysaneskies.features.mining.crystalhollows.WormW
 import me.partlysanestudios.partlysaneskies.features.mining.crystalhollows.gemstonewaypoints.GemstoneData
 import me.partlysanestudios.partlysaneskies.features.mining.crystalhollows.gemstonewaypoints.GemstoneWaypointRender
 import me.partlysanestudios.partlysaneskies.features.mining.events.MiningEventNotifier
+import me.partlysanestudios.partlysaneskies.features.party.PartyManager
 import me.partlysanestudios.partlysaneskies.features.security.PrivacyMode
 import me.partlysanestudios.partlysaneskies.features.security.modschecker.ModChecker
 import me.partlysanestudios.partlysaneskies.features.skills.BestiaryLevelUpWebhook
@@ -292,6 +293,7 @@ class PartlySaneSkies {
         registerEvent(BestiaryMilestoneWebhook)
         registerEvent(BestiaryLevelUpWebhook)
         registerEvent(PetLevelUpWebhook)
+        registerEvent(FriendsData)
 
         // Registers all client side commands
         HelpCommand.registerPSSCommand()

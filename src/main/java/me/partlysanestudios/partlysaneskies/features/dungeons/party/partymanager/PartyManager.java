@@ -60,11 +60,7 @@ public class PartyManager {
     }
 
     public static void registerCommand() {
-        new PSSCommand("partymanager")
-            .addAlias("pm", "partypm")
-            .setDescription("Opens the Party Manager")
-            .setRunnable(a -> PartyManager.startPartyManager())
-            .register();
+
     }
 
     private static void processList(String str, PartyMember.PartyRank rank) {

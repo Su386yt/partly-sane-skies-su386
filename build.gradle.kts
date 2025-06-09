@@ -14,17 +14,20 @@ plugins {
     id("dev.deftu.gradle.tools.minecraft.releases") version(dgtVersion)
 }
 
-loom {
-    forge {
-        pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
-    }
-}
-
 toolkitLoomHelper {
-    useTweaker("cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
+    useOneConfig {
+        version = "1.0.0-alpha.106"
+        loaderVersion = "1.1.0-alpha.46"
+
+        for (module in arrayOf("commands", "config", "config-impl", "events", "internal", "ui", "utils")) {
+            +module
+        }
+    }
+
     disableRunConfigs(GameSide.SERVER)
-    useForgeMixin("pss")
     useDevAuth("+")
+    useMixinExtras("0.4.1")
+    useMixinRefMap("pss")
 }
 
 repositories {
@@ -49,15 +52,12 @@ dependencies {
     implementation(shade("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
         isTransitive = false
     })
-    implementation(shade("cc.polyfrost:oneconfig-wrapper-launchwrapper:1.0.0-beta17")!!)
 
     implementation(shade("com.github.NetheriteMiner:DiscordIPC:3106be5") {
         isTransitive = false
     })
     
     implementation(kotlin("stdlib"))
-
-    compileOnly("cc.polyfrost:oneconfig-${mcData.version}-${mcData.loader.friendlyString}:0.2.2-alpha+")
 }
 
 toolkitReleases {

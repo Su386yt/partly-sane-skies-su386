@@ -58,6 +58,7 @@ dependencies {
     })
     
     implementation(kotlin("stdlib"))
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${mcData.dependencies.fabric.fabricApiVersion}")
 }
 
 toolkitReleases {

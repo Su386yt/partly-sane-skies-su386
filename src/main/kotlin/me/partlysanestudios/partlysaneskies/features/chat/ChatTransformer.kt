@@ -5,17 +5,17 @@
 
 package me.partlysanestudios.partlysaneskies.features.chat
 
-import cc.polyfrost.oneconfig.events.event.ChatSendEvent
-import cc.polyfrost.oneconfig.libs.eventbus.Subscribe
 import me.partlysanestudios.partlysaneskies.PartlySaneSkies
 import me.partlysanestudios.partlysaneskies.PartlySaneSkies.Companion.config
+import org.polyfrost.oneconfig.api.event.v1.events.ChatEvent
+import org.polyfrost.oneconfig.api.event.v1.invoke.impl.Subscribe
 
 // Currently only using to owoify send chat messages (meow)
 object ChatTransformer {
     var lastmsg = ""
 
     @Subscribe
-    fun onChat(event: ChatSendEvent) {
+    fun onChat(event: ChatEvent.Send) {
         // dont mess with chats that dont want to
         if (!doChatTransform()) {
             return
@@ -28,11 +28,11 @@ object ChatTransformer {
             return
         }
 
-        event.isCancelled = true
+        event.cancelled = true
 
         // Do not go into recursion (bad)
         if (lastmsg == msg) {
-            event.isCancelled = false
+            event.cancelled = false
             return
         }
 

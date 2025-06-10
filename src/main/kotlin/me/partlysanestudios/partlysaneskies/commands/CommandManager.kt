@@ -4,44 +4,69 @@
 //
 package me.partlysanestudios.partlysaneskies.commands
 
-import net.minecraft.command.CommandException
-import net.minecraft.command.ICommand
-import net.minecraft.command.ICommandSender
-import net.minecraft.util.BlockPos
-import net.minecraftforge.client.ClientCommandHandler
+import com.mojang.brigadier.CommandDispatcher
+import com.mojang.brigadier.builder.LiteralArgumentBuilder
+import com.mojang.brigadier.builder.LiteralArgumentBuilder.literal
+import com.mojang.brigadier.builder.RequiredArgumentBuilder.argument
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
+import net.minecraft.command.CommandRegistryAccess
+
 
 object CommandManager {
     var commandList = HashMap<String, PSSCommand>()
 
-    fun getCommand(commandName: String): PSSCommand? = commandList[commandName]
+    private fun registerCommands() {
+        for (command in commandList) {
+            ClientCommandRegistrationCallback.EVENT.register(
+                ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, registryAccess: CommandRegistryAccess? ->
+                    registerCommand(command.value, dispatcher)
+                },
+            )
+        }
+    }
 
-    fun registerCommand(pssCommand: PSSCommand): ICommand? {
-        if (pssCommand.isRegistered) return null
-        val iCommand: ICommand =
-            object : ICommand {
-                override fun getCommandName(): String = pssCommand.name
+    private fun registerCommand(
+        command: PSSCommand,
+        dispatcher: CommandDispatcher<FabricClientCommandSource?>
+    ) {
+        dispatcher.register(
+            ClientCommandManager.literal(command.name)
+                .registerRequiredArguments(command.requiredArguments)
+                .registerRunnable(command.runnable, command.requiredArguments)
+                .registerSubcommands(command.subcommands),
+        )
+    }
 
-                override fun getCommandUsage(sender: ICommandSender): String = pssCommand.description
+    private fun LiteralArgumentBuilder<FabricClientCommandSource?>.registerRequiredArguments(
+        arguments: List<ArgumentData<*>>
+    ): LiteralArgumentBuilder<FabricClientCommandSource?> = if (arguments.isEmpty()) this
+    else this.then(argument(arguments.first().name, arguments.first().type)).registerRequiredArguments(arguments.drop(1))
 
-                override fun getCommandAliases(): List<String> = pssCommand.aliases
+    private fun LiteralArgumentBuilder<FabricClientCommandSource?>.registerRunnable(
+        runnable: PSSCommandRunnable?,
+        requiredArguments: List<ArgumentData<*>>)
+    : LiteralArgumentBuilder<FabricClientCommandSource?> = if (runnable == null) this
+    else this.executes { context ->
+        val arguments = mutableListOf<String>()
+        for (argument in requiredArguments) {
+            arguments.add(context.getArgument(argument.name, argument.argumentClass).toString())
+        }
 
-                @Throws(CommandException::class)
-                override fun processCommand(sender: ICommandSender, args: Array<String>) {
-                    pssCommand.runRunnable(args)
-                }
+        runnable(arguments.toTypedArray())
+        1
+    }
 
-                override fun canCommandSenderUseCommand(sender: ICommandSender): Boolean = true
-
-                override fun addTabCompletionOptions(sender: ICommandSender, args: Array<String>, pos: BlockPos): List<String> = ArrayList()
-
-                override fun isUsernameIndex(args: Array<String>, index: Int): Boolean = false
-
-                override fun compareTo(other: ICommand): Int = commandName.compareTo(other.commandName)
-            }
-        pssCommand.iCommand = iCommand
-        ClientCommandHandler.instance.registerCommand(iCommand)
-        pssCommand.isRegistered = true
-        commandList[pssCommand.name] = pssCommand
-        return iCommand
+    private fun LiteralArgumentBuilder<FabricClientCommandSource?>.registerSubcommands(
+        subcommands: Collection<PSSCommand>)
+    : LiteralArgumentBuilder<FabricClientCommandSource?> = this.also {
+        for (subcommand in subcommands) {
+            this.then(literal<FabricClientCommandSource?>(subcommand.name)
+                .registerRequiredArguments(subcommand.requiredArguments)
+                .registerRunnable(subcommand.runnable, subcommand.requiredArguments)
+                .registerSubcommands(subcommand.subcommands),
+            )
+        }
     }
 }
